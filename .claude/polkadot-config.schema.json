@@ -1,0 +1,230 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://polkadot-dapp-template/config-schema.json",
+  "title": "Polkadot dApp Configuration",
+  "description": "Configuration schema for generating custom Polkadot dApps",
+  "type": "object",
+  "required": ["version", "project", "features"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version",
+      "enum": ["1.0"],
+      "default": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "description": "Project metadata",
+      "required": ["name", "chain"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Project name (kebab-case recommended)",
+          "pattern": "^[a-z0-9-]+$",
+          "minLength": 3,
+          "maxLength": 50,
+          "examples": ["my-polkadot-app", "dao-manager", "token-swap"]
+        },
+        "chain": {
+          "type": "string",
+          "description": "Target blockchain (Phase 1: QFN only)",
+          "enum": ["qfn"],
+          "default": "qfn"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional project description",
+          "maxLength": 200
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "description": "Pallet-based features to enable",
+      "additionalProperties": false,
+      "properties": {
+        "assets": {
+          "type": "object",
+          "description": "Assets pallet operations (fungible tokens)",
+          "required": ["enabled"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable Assets pallet features"
+            },
+            "operations": {
+              "type": "array",
+              "description": "Asset operations to include",
+              "items": {
+                "type": "string",
+                "enum": ["create", "mint", "transfer", "destroy", "freeze", "thaw", "burn"]
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            }
+          },
+          "if": {
+            "properties": { "enabled": { "const": true } }
+          },
+          "then": {
+            "required": ["operations"],
+            "properties": {
+              "operations": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "balances": {
+          "type": "object",
+          "description": "Balances pallet operations (native token transfers)",
+          "required": ["enabled"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable Balances pallet features"
+            },
+            "operations": {
+              "type": "array",
+              "description": "Balance operations to include",
+              "items": {
+                "type": "string",
+                "enum": ["transfer", "transfer_keep_alive", "transfer_all"]
+              },
+              "uniqueItems": true
+            }
+          },
+          "if": {
+            "properties": { "enabled": { "const": true } }
+          },
+          "then": {
+            "required": ["operations"],
+            "properties": {
+              "operations": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "governance": {
+          "type": "object",
+          "description": "Governance features (Future: Phase 2)",
+          "required": ["enabled"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable governance features",
+              "const": false
+            },
+            "types": {
+              "type": "array",
+              "description": "Governance types (not yet implemented)",
+              "items": {
+                "type": "string",
+                "enum": ["democracy", "council", "treasury"]
+              }
+            }
+          }
+        },
+        "staking": {
+          "type": "object",
+          "description": "Staking features (Future: Phase 2)",
+          "required": ["enabled"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable staking features",
+              "const": false
+            },
+            "operations": {
+              "type": "array",
+              "description": "Staking operations (not yet implemented)",
+              "items": {
+                "type": "string",
+                "enum": ["bond", "nominate", "claim", "unbond"]
+              }
+            }
+          }
+        }
+      },
+      "minProperties": 1
+    },
+    "ui": {
+      "type": "object",
+      "description": "UI configuration",
+      "additionalProperties": false,
+      "properties": {
+        "branding": {
+          "type": "object",
+          "description": "Application branding",
+          "additionalProperties": false,
+          "properties": {
+            "appName": {
+              "type": "string",
+              "description": "Display name for the application",
+              "minLength": 3,
+              "maxLength": 50,
+              "default": "Polkadot dApp"
+            },
+            "logoUrl": {
+              "type": ["string", "null"],
+              "description": "URL to custom logo (null = use default)",
+              "format": "uri",
+              "default": null
+            }
+          }
+        },
+        "theme": {
+          "type": "string",
+          "description": "Color theme",
+          "enum": ["light", "dark", "system"],
+          "default": "system"
+        },
+        "layout": {
+          "type": "string",
+          "description": "Navigation layout style",
+          "enum": ["sidebar", "topnav"],
+          "default": "sidebar"
+        }
+      }
+    },
+    "advanced": {
+      "type": "object",
+      "description": "Advanced configuration options",
+      "additionalProperties": false,
+      "properties": {
+        "errorHandling": {
+          "type": "string",
+          "description": "Error message verbosity",
+          "enum": ["basic", "verbose"],
+          "default": "basic"
+        },
+        "queryStaleTime": {
+          "type": "integer",
+          "description": "TanStack Query stale time in milliseconds",
+          "minimum": 1000,
+          "maximum": 300000,
+          "default": 30000
+        },
+        "toastDuration": {
+          "type": "integer",
+          "description": "Toast notification duration in milliseconds",
+          "minimum": 5000,
+          "maximum": 60000,
+          "default": 30000
+        },
+        "includeDevtools": {
+          "type": "boolean",
+          "description": "Include TanStack Query devtools",
+          "default": true
+        }
+      }
+    }
+  }
+}
