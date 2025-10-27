@@ -1,18 +1,9 @@
-import { useState } from 'react'
-
-import { Coins, LayoutDashboard, Plus, Send, Trash2 } from 'lucide-react'
-
 import {
   AccountSelector,
-  AssetList,
   ConnectionBanner,
-  CreateAsset,
-  DestroyAsset,
-  MintTokens,
-  TransferTokens,
   WalletConnector,
 } from '@/components'
-import { Button, Toaster } from '@/components/ui'
+import { Toaster } from '@/components/ui'
 import {
   useConnectionContext,
   useTransactionToasts,
@@ -21,12 +12,9 @@ import {
 
 import './App.css'
 
-type Tab = 'assets' | 'create' | 'mint' | 'transfer' | 'destroy'
-
 export default function App() {
   const { isConnected: isWalletConnected } = useWalletContext()
   const { isConnected: isChainConnected } = useConnectionContext()
-  const [activeTab, setActiveTab] = useState<Tab>('assets')
 
   // Initialize transaction toasts
   useTransactionToasts()
@@ -38,48 +26,6 @@ export default function App() {
       </div>
     )
   }
-
-  const navigationItems = [
-    {
-      id: 'assets' as const,
-      label: 'Portfolio',
-      icon: LayoutDashboard,
-      component: AssetList,
-      section: 'main',
-    },
-    {
-      id: 'create' as const,
-      label: 'Create Asset',
-      icon: Plus,
-      component: CreateAsset,
-      section: 'main',
-    },
-    {
-      id: 'mint' as const,
-      label: 'Mint Tokens',
-      icon: Coins,
-      component: MintTokens,
-      section: 'operations',
-    },
-    {
-      id: 'transfer' as const,
-      label: 'Transfer',
-      icon: Send,
-      component: TransferTokens,
-      section: 'operations',
-    },
-    {
-      id: 'destroy' as const,
-      label: 'Destroy Asset',
-      icon: Trash2,
-      component: DestroyAsset,
-      section: 'admin',
-    },
-  ]
-
-  const ActiveComponent =
-    navigationItems.find((item) => item.id === activeTab)?.component ||
-    AssetList
 
   return (
     <div className="bg-background flex min-h-screen">
@@ -147,28 +93,7 @@ export default function App() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <div className="space-y-1">
-            {navigationItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <Button
-                  key={item.id}
-                  variant={activeTab === item.id ? 'default' : 'ghost'}
-                  className={`h-10 w-full justify-start px-3 ${
-                    activeTab === item.id
-                      ? ''
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                  }`}
-                  onClick={() => setActiveTab(item.id)}
-                >
-                  <Icon className="mr-3 h-4 w-4" />
-                  {item.label}
-                </Button>
-              )
-            })}
-          </div>
-        </nav>
+        <nav className="flex-1 p-4"></nav>
       </div>
 
       {/* Main content */}
@@ -194,10 +119,6 @@ export default function App() {
             <AccountSelector />
           </div>
         </header>
-
-        <main className="bg-muted/20 flex-1 p-4">
-          <ActiveComponent />
-        </main>
       </div>
 
       <Toaster toastOptions={{ duration: 30_000 }} />
