@@ -68,11 +68,6 @@ Quantum Fusion Network (QFN) asset management app - React 19 + TypeScript + polk
 
 **Network:** QF Network testnet `wss://test.qfnetwork.xyz`
 
-**Asset Operations:**
-- Create: Assets.create + set_metadata + optional mint
-- Destroy: freeze_asset → start_destroy → destroy_approvals → destroy_accounts → finish_destroy
-- All operations use `Utility.batch_all` pallet
-
 **polkadot-api:**
 - Descriptors in `.papi/descriptors` (auto-generated via `papi` command)
 - Metadata in `.papi/metadata/*.scale` files
