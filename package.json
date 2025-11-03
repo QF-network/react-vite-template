@@ -1,9 +1,9 @@
 {
-  "name": "polkadot-dapp-template",
+  "name": "qfn-dapp-template",
   "private": true,
   "version": "1.0.0",
-  "description": "Template for building Polkadot dApps with polkadot-api, React 19, and TypeScript",
-  "keywords": ["polkadot", "substrate", "polkadot-api", "react", "typescript", "web3", "blockchain", "web3-template"],
+  "description": "Template for building Quantum Fusion Network (QFN) dApps with polkadot-api, React 19, and TypeScript",
+  "keywords": ["qfn", "quantum-fusion-network", "substrate", "polkadot-api", "react", "typescript", "web3", "blockchain", "web3-template"],
   "type": "module",
   "scripts": {
     "dev": "vite",

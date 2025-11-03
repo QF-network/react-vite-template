@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-QF Network asset management app - React 19 + TypeScript + polkadot-api
+Quantum Fusion Network (QFN) asset management app - React 19 + TypeScript + polkadot-api
 
 ## CODE QUALITY RULES (Apply to Every Change)
 

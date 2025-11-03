@@ -1,6 +1,6 @@
-# Polkadot dApp Template
+# Quantum Fusion Network (QFN) dApp Template
 
-A production-ready template for building Polkadot dApps with polkadot-api, React 19, and TypeScript.
+A production-ready template for building Quantum Fusion Network (QFN) dApps with polkadot-api, React 19, and TypeScript. QFN is a solochain built on the Polkadot SDK.
 
 ## Features
 
@@ -51,14 +51,14 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ### 4. Connect Wallet
 
-Install a Polkadot wallet extension:
+Install a wallet extension for QFN (compatible with Polkadot.js ecosystem):
 - [Polkadot.js Extension](https://polkadot.js.org/extension/)
 - [Talisman](https://www.talisman.xyz/)
 - [SubWallet](https://subwallet.app/)
 
 ## Customization with Claude Code
 
-This template is designed to work with the Polkadot dApp workflow generator:
+This template is designed to work with the QFN dApp workflow generator:
 
 ### Option 1: Use Wizard (Recommended)
 
