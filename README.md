@@ -140,35 +140,6 @@ pnpm papi add dot -n polkadot
 
 Then update `src/hooks/useConnectionStatus.ts` to use the new descriptor.
 
-## Included Features
-
-The template includes a complete asset management implementation:
-
-- **Create Asset** - Create new fungible tokens
-- **Mint Tokens** - Mint tokens to addresses
-- **Transfer Tokens** - Transfer tokens between accounts
-- **Destroy Asset** - Permanently destroy assets
-- **Portfolio View** - View all assets and balances
-
-## Extending the Template
-
-### Add New Pallet Operations
-
-1. Create operation functions in `src/lib/operations.ts`
-2. Create component in `src/components/YourFeature.tsx`
-3. Add toast config in `src/lib/toastConfigs.ts`
-4. Update navigation in `src/App.tsx`
-
-See `src/lib/assetOperations.ts` for reference patterns.
-
-### Add Query Hooks
-
-1. Create hook in `src/hooks/useYourQuery.ts`
-2. Use TanStack Query with polkadot-api observables
-3. Export from `src/hooks/index.ts`
-
-See `src/hooks/useNextAssetId.ts` for reference.
-
 ## Key Patterns
 
 ### Transaction Flow
@@ -217,14 +188,6 @@ All errors are automatically parsed and displayed with user-friendly messages. S
 - **polkadot-api** - [Official docs](https://papi.how)
 - **React 19** - [React docs](https://react.dev)
 
-## Architecture Decisions
-
-See `CLAUDE.md` for detailed architecture documentation, including:
-- State management patterns
-- Transaction lifecycle
-- Error handling strategy
-- Query configuration
-- TypeScript conventions
 
 ## License
 
