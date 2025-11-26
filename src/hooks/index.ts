@@ -1,5 +1,6 @@
 export { ConnectionContext, useConnectionContext } from './useConnectionContext'
 export { useConnectionStatus } from './useConnectionStatus'
+export { useFee } from './useFee'
 export { useTransaction } from './useTransaction'
 export {
   TransactionContext,
